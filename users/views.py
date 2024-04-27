@@ -25,4 +25,3 @@ class UserUpdateAPIView(generics.UpdateAPIView):
 
 class UserDestroyAPIView(generics.DestroyAPIView):
     serializer_class = UserSerializer
-
