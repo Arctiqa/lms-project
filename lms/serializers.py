@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
 from lms.models import Course, Lesson
+
+
 # from users.models import Payment
 # from users.serializers import PaymentSerializer
 
@@ -14,6 +16,7 @@ class LessonSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     lessons_count = serializers.SerializerMethodField()
     lessons = LessonSerializer(source='lesson_set', many=True, read_only=True)
+
     # payment_info = serializers.SerializerMethodField()
     #
     # def get_payment_info(self, obj):
