@@ -1,5 +1,44 @@
 [
   {
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+      "action_time": "2024-05-04T07:26:08.451Z",
+      "user": 11,
+      "content_type": 3,
+      "object_id": "1",
+      "object_repr": "moderator",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+      "action_time": "2024-05-04T07:26:25.194Z",
+      "user": 11,
+      "content_type": 6,
+      "object_id": "12",
+      "object_repr": "Test1@yandex.ru",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Groups\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+      "action_time": "2024-05-04T07:27:02.972Z",
+      "user": 11,
+      "content_type": 6,
+      "object_id": "12",
+      "object_repr": "Test1@yandex.ru",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Staff status\"]}}]"
+    }
+  },
+  {
     "model": "auth.permission",
     "pk": 1,
     "fields": {
@@ -324,6 +363,19 @@
     }
   },
   {
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+      "name": "moderator",
+      "permissions": [
+        14,
+        16,
+        30,
+        32
+      ]
+    }
+  },
+  {
     "model": "contenttypes.contenttype",
     "pk": 1,
     "fields": {
@@ -396,20 +448,28 @@
     }
   },
   {
-    "model": "users.user",
-    "pk": 1,
+    "model": "sessions.session",
+    "pk": "51p0m2pnaftqx6q1mc1fy9usdp3lex7k",
     "fields": {
-      "password": "password1",
-      "last_login": null,
-      "is_superuser": false,
+      "session_data": ".eJxVjDsOwjAQBe_iGlm7iR0nlPScIdrshwSQLeVTIe4OkVJA-2bmvVxP2zr226JzP4k7O0R3-h0H4ofmncid8q14Lnmdp8Hvij_o4q9F9Hk53L-DkZbxW4OAARtUHbRKSSwkYYxKBCiRIDVaVUmADAdWY20kcF2HLoJYa-jeHyYiOQg:1s39Nd:L7CtTY59_7ksIWcX_lfVu4SqnkS_A0bMp_PwJ6unJJc",
+      "expire_date": "2024-05-18T07:00:21.561Z"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 11,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$3beOlf8QEUfBrODCA9xu0w$HKqQ4GRH7d+yD532twdAcx2mYcJOjnMpkTA+s3Z1Mro=",
+      "last_login": "2024-05-04T07:00:21.550Z",
+      "is_superuser": true,
       "first_name": "",
       "last_name": "",
-      "is_staff": false,
+      "is_staff": true,
       "is_active": true,
-      "date_joined": "2024-04-28T05:48:03.499Z",
-      "email": "test1@test.test",
-      "phone": "73777222222",
-      "city": "City1",
+      "date_joined": "2024-04-29T09:07:57.268Z",
+      "email": "Sinitro@yandex.ru",
+      "phone": null,
+      "city": null,
       "avatar": "avatars/default.jpg",
       "groups": [],
       "user_permissions": []
@@ -417,58 +477,24 @@
   },
   {
     "model": "users.user",
-    "pk": 2,
+    "pk": 12,
     "fields": {
-      "password": "password1",
+      "password": "pbkdf2_sha256$600000$306Bk1vZSGdCuN7xH8KJ5Z$vOEmaQXtjXRLmjI4R/ChbGf6l+7qiK9fmWzjZenq9aI=",
       "last_login": null,
       "is_superuser": false,
       "first_name": "",
       "last_name": "",
-      "is_staff": false,
+      "is_staff": true,
       "is_active": true,
-      "date_joined": "2024-04-28T05:48:21.646Z",
-      "email": "test2@test.test",
-      "phone": "737772333332",
-      "city": "City2",
+      "date_joined": "2024-05-04T06:37:15Z",
+      "email": "Test1@yandex.ru",
+      "phone": null,
+      "city": null,
       "avatar": "avatars/default.jpg",
-      "groups": [],
+      "groups": [
+        1
+      ],
       "user_permissions": []
-    }
-  },
-  {
-    "model": "users.payment",
-    "pk": 1,
-    "fields": {
-      "user": 1,
-      "payment_date": "2024-01-23T00:00:50Z",
-      "paid_course": 1,
-      "paid_lesson": 1,
-      "payment_amount": "700.00",
-      "payment_method": "cash"
-    }
-  },
-  {
-    "model": "users.payment",
-    "pk": 2,
-    "fields": {
-      "user": 2,
-      "payment_date": "2024-02-24T00:00:50Z",
-      "paid_course": 4,
-      "paid_lesson": 1,
-      "payment_amount": "800.00",
-      "payment_method": "transfer"
-    }
-  },
-  {
-    "model": "users.payment",
-    "pk": 3,
-    "fields": {
-      "user": 2,
-      "payment_date": "2024-02-28T00:00:50Z",
-      "paid_course": 4,
-      "paid_lesson": 2,
-      "payment_amount": "800.00",
-      "payment_method": "cash"
     }
   },
   {
@@ -477,7 +503,8 @@
     "fields": {
       "name": "Python",
       "preview": "course_previews/default.jpg",
-      "description": ""
+      "description": "",
+      "owner": null
     }
   },
   {
@@ -486,7 +513,8 @@
     "fields": {
       "name": "JAVA",
       "preview": "course_previews/default.jpg",
-      "description": ""
+      "description": "",
+      "owner": null
     }
   },
   {
@@ -497,7 +525,8 @@
       "description": "Урок 1",
       "preview": "lesson_previews/default.jpg",
       "link": "http://some.url",
-      "course": 1
+      "course": 1,
+      "owner": null
     }
   },
   {
@@ -508,7 +537,8 @@
       "description": "Урок 2",
       "preview": "lesson_previews/default.jpg",
       "link": "http://some2.url",
-      "course": 1
+      "course": 1,
+      "owner": null
     }
   },
   {
@@ -519,7 +549,8 @@
       "description": "Урок 1",
       "preview": "lesson_previews/default.jpg",
       "link": "http://some3.url",
-      "course": 4
+      "course": 4,
+      "owner": null
     }
   },
   {
@@ -530,7 +561,8 @@
       "description": "Урок 2",
       "preview": "lesson_previews/default.jpg",
       "link": "http://some4.url",
-      "course": 4
+      "course": 4,
+      "owner": null
     }
   }
 ]
