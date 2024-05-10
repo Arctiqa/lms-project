@@ -25,7 +25,7 @@ class Lesson(models.Model):
     description = models.TextField(verbose_name='описание')
     preview = models.ImageField(upload_to='lesson_previews', default='lesson_previews/default.jpg',
                                 verbose_name='превью')
-    link = models.CharField(max_length=200, verbose_name='ссылка', **NULLABLE)
+    url = models.CharField(max_length=200, verbose_name='ссылка', **NULLABLE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='курс')
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='Владелец')
 

@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
 from lms.models import Course, Lesson
+from lms.validators import URLCheckValidator
+from users.models import Subscription
 
 
 # from users.models import Payment
@@ -11,10 +13,13 @@ class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = '__all__'
+        validators = [
+            URLCheckValidator(field='url')
+        ]
 
 
 class CourseSerializer(serializers.ModelSerializer):
-    lessons_count = serializers.SerializerMethodField()
+    lessons_count = serializers.SerializerMethodField(read_only=True)
     lessons = LessonSerializer(source='lesson_set', many=True, read_only=True)
 
     # payment_info = serializers.SerializerMethodField()
@@ -29,3 +34,9 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = ('id', 'name', 'lessons_count', 'lessons')  # payment_info
+
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscription
+        fields = '__all__'

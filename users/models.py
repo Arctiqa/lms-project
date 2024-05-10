@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -41,3 +42,16 @@ class Payment(models.Model):
         verbose_name = 'платеж'
         verbose_name_plural = 'платежи'
         ordering = ['-payment_date']
+
+
+class Subscription(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='подписчик')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='курс')
+    status = models.BooleanField(default=False, verbose_name='статус подписки')
+
+    def __str__(self):
+        return f'{self.user} - {self.course} - {self.status}'
+
+    class Meta:
+        verbose_name = 'подписчик'
+        verbose_name_plural = 'подписчики'
