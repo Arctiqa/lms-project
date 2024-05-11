@@ -113,7 +113,6 @@ class SubscriptionTest(APITestCase):
         Subscription.objects.create(
             course=self.course,
             user=self.user,
-            status=True
         )
 
         data = {
