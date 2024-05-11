@@ -72,7 +72,7 @@ class SubscriptionAPIView(APIView):
             message = 'подписка удалена'
 
         else:
-            Subscription.objects.create(user=user, course=course_item, status=True)
+            Subscription.objects.create(user=user, course=course_item)
             message = 'подписка добавлена'
 
         return Response({'message': message})
