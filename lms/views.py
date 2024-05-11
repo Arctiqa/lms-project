@@ -2,7 +2,7 @@ from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from lms.models import Course, Lesson
-from lms.paginators import LessonPaginator, CoursePaginator
+from lms.paginators import CourseLessonPaginator
 from lms.serializers import CourseSerializer, LessonSerializer
 from users.permissions import IsModerator, IsOwner
 
@@ -10,7 +10,7 @@ from users.permissions import IsModerator, IsOwner
 class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
-    pagination_class = CoursePaginator
+    pagination_class = CourseLessonPaginator
 
     def get_permissions(self):
         if self.action == 'create':
@@ -42,7 +42,7 @@ class LessonListAPIView(generics.ListAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsAuthenticated, AllowAny, IsModerator | IsOwner]
-    pagination_class = LessonPaginator
+    pagination_class = CourseLessonPaginator
 
 
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
