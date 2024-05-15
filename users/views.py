@@ -1,6 +1,7 @@
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
+from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -9,6 +10,7 @@ from lms.models import Course
 from users.models import User, Payment, Subscription
 from users.permissions import IsOwner
 from users.serializers import UserSerializer, PaymentSerializer
+from users.services import create_stripe_price, create_stripe_session, create_stripe_product
 
 
 class UserCreateAPIView(generics.CreateAPIView):
@@ -76,3 +78,20 @@ class SubscriptionAPIView(APIView):
             message = 'подписка добавлена'
 
         return Response({'message': message})
+
+
+class PaymentAPIView(CreateAPIView):
+    serializer_class = PaymentSerializer
+    queryset = Payment.objects.all()
+
+    def perform_create(self, serializer):
+        payment = serializer.save(user=self.request.user)
+
+        product = create_stripe_product(payment)
+        price = create_stripe_price(payment.payment_amount, product)
+        session_id, payment_link = create_stripe_session(price)
+
+        payment.session_id = session_id
+        payment.link = payment_link
+        payment.save()
+
