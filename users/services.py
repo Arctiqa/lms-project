@@ -1,8 +1,6 @@
 import stripe
-from rest_framework import status
 
-from config.settings import STRIPE_API_KEY, CURRENCY_API_URL, CURRENCY_API_KEY
-import requests
+from config.settings import STRIPE_API_KEY
 
 stripe.api_key = STRIPE_API_KEY
 
