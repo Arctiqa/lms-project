@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from lms.models import Course, Lesson
 from lms.paginators import CourseLessonPaginator
 from lms.serializers import CourseSerializer, LessonSerializer
+from lms.tasks import send_email_update_course
 from users.permissions import IsModerator, IsOwner
 
 
@@ -15,7 +16,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action == 'create':
             self.permission_classes = (IsAuthenticated,)
-        elif self.action in ['retrieve', 'update', 'list']:
+        elif self.action in ['retrieve', 'update', 'partial_update', 'list']:
             self.permission_classes = (IsAuthenticated | IsModerator | IsOwner,)
         elif self.action == 'destroy':
             self.permission_classes = (IsAuthenticated, ~IsModerator, IsOwner,)
@@ -25,6 +26,10 @@ class CourseViewSet(viewsets.ModelViewSet):
         course = serializer.save()
         course.owner = self.request.user
         course.save()
+
+    def perform_update(self, serializer):
+        course = serializer.save()
+        send_email_update_course.delay(course.id)
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
