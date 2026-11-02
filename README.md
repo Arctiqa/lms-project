@@ -88,10 +88,3 @@ python manage.py test
 config/       — настройки, celery, urls
 users/        — User, Payment, Subscription, JWT, Stripe
 lms/          — Course, Lesson, права, валидаторы, задачи
-
-## TODO
-
-- Покрыть тестами оплату и Celery-задачи
-- Добавить .env.example и Docker Compose
-- Перевести Stripe на вебхуки (сейчас success_url — заглушка)
-- Разделить права через permission_classes вместо кастомной логики в get_permissions
