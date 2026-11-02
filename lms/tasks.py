@@ -19,5 +19,5 @@ def send_email_update_course(course_id):
             subject=course.name,
             message=message,
             from_email=EMAIL_HOST_USER,
-            recipient_list=[user.user]
+            recipient_list=[user.user.email]
         )

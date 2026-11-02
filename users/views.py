@@ -2,7 +2,7 @@ from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from rest_framework.generics import CreateAPIView
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -20,7 +20,7 @@ class UserCreateAPIView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         user = serializer.save(is_active=True)
-        user.set_password(user.password)
+        user.set_password(self.request.data['password'])
         user.save()
 
 
@@ -44,7 +44,7 @@ class UserUpdateAPIView(generics.UpdateAPIView):
 
 class UserDestroyAPIView(generics.DestroyAPIView):
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
 
 class PaymentCreateAPIView(generics.CreateAPIView):
@@ -62,6 +62,7 @@ class PaymentListAPIView(generics.ListAPIView):
 
 
 class SubscriptionAPIView(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, *args, **kwargs):
         user = self.request.user
         course_id = self.request.data.get('course')
