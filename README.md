@@ -1,4 +1,4 @@
-# LMS Platform — REST API для онлайн-школы
+# LMS Platform — REST API
 
 Pet-проект: backend-платформа для онлайн-обучения с курсами, уроками, подписками, оплатой через Stripe и фоновыми задачами на Celery.
 
